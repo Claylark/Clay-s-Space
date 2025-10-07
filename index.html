@@ -1,0 +1,603 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Clay's Space</title>
+  <!-- 引入外部资源 -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- Tailwind配置 -->
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: '#7C3AED',
+            secondary: '#4F46E5',
+            accent: '#EC4899',
+            rail: '#0EA5E9',
+            light: '#F8FAFC',
+          },
+          fontFamily: {
+            inter: ['Inter', 'sans-serif'],
+          },
+        },
+      }
+    }
+  </script>
+  
+  <style type="text/tailwindcss">
+    @layer utilities {
+      .content-auto {
+        content-visibility: auto;
+      }
+      .text-shadow {
+        text-shadow: 0 2px 10px rgba(124, 58, 237, 0.2);
+      }
+      .card-hover {
+        transition: all 0.3s ease;
+      }
+      .card-hover:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 25px -5px rgba(124, 58, 237, 0.15);
+      }
+      .tag-hover {
+        transition: all 0.2s ease;
+      }
+      .tag-hover:hover {
+        transform: scale(1.05);
+      }
+      .scroll-container {
+        scrollbar-width: thin;
+        scrollbar-color: rgba(124, 58, 237, 0.3) transparent;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+      }
+      .scroll-container::-webkit-scrollbar {
+        height: 6px;
+      }
+      .scroll-container::-webkit-scrollbar-track {
+        background: transparent;
+      }
+      .scroll-container::-webkit-scrollbar-thumb {
+        background-color: rgba(124, 58, 237, 0.3);
+        border-radius: 3px;
+      }
+      .scroll-gradient {
+        position: relative;
+      }
+      .scroll-gradient::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 40px;
+        height: 100%;
+        background: linear-gradient(to right, transparent, rgba(248, 250, 252, 0.9));
+        pointer-events: none;
+        z-index: 1;
+      }
+      .scroll-gradient::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 40px;
+        height: 100%;
+        background: linear-gradient(to left, transparent, rgba(248, 250, 252, 0.9));
+        pointer-events: none;
+        z-index: 1;
+      }
+    }
+  </style>
+</head>
+
+<body class="font-inter bg-gradient-to-br from-purple-50 to-blue-50 text-slate-800 min-h-screen">
+  <!-- 背景装饰 -->
+  <div class="fixed inset-0 overflow-hidden pointer-events-none z-0">
+    <div class="absolute -top-20 -right-20 w-96 h-96 bg-primary/10 rounded-full blur-3xl"></div>
+    <div class="absolute top-1/3 -left-40 w-96 h-96 bg-rail/10 rounded-full blur-3xl"></div>
+    <div class="absolute bottom-0 right-1/4 w-80 h-80 bg-secondary/10 rounded-full blur-3xl"></div>
+  </div>
+
+  <!-- 导航栏 -->
+  <nav class="fixed w-full bg-white/80 backdrop-blur-md z-50 transition-all duration-300 shadow-sm" id="navbar">
+    <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+      <div class="flex items-center space-x-2">
+        <span class="font-bold text-xl text-primary">Clay's Space</span>
+      </div>
+      
+      <!-- 桌面端导航 -->
+      <div class="hidden md:flex items-center space-x-8">
+        <a href="#profile" class="font-medium hover:text-primary transition-colors">个人资料</a>
+        <a href="#interests" class="font-medium text-primary border-b-2 border-primary pb-1">兴趣爱好</a>
+        <a href="#looking-for" class="font-medium hover:text-primary transition-colors">想认识</a>
+        <a href="#contact" class="font-medium hover:text-primary transition-colors">联系方式</a>
+      </div>
+      
+      <!-- 移动端菜单按钮 -->
+      <button class="md:hidden text-slate-800 text-xl" id="menuBtn">
+        <i class="fa fa-bars"></i>
+      </button>
+    </div>
+    
+    <!-- 移动端导航菜单 -->
+    <div class="md:hidden hidden bg-white shadow-md absolute w-full" id="mobileMenu">
+      <div class="container mx-auto px-4 py-3 flex flex-col space-y-4">
+        <a href="#profile" class="font-medium py-2 hover:text-primary transition-colors">个人资料</a>
+        <a href="#interests" class="font-medium py-2 text-primary transition-colors">兴趣爱好</a>
+        <a href="#looking-for" class="font-medium py-2 hover:text-primary transition-colors">想认识</a>
+        <a href="#contact" class="font-medium py-2 hover:text-primary transition-colors">联系方式</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- 英雄区域 -->
+  <header class="pt-32 pb-20 md:pt-40 md:pb-32 px-4 text-center relative z-10">
+    <div class="container mx-auto max-w-4xl">
+      <!-- 头像 -->
+      <div class="relative w-36 h-36 md:w-48 md:h-48 mx-auto mb-8 rounded-full overflow-hidden border-4 border-primary/30 shadow-lg transform transition-transform hover:scale-105">
+        <img src="https://avatars.githubusercontent.com/u/95098372?v=4" alt="Clay的头像" 
+             class="w-full h-full object-cover" loading="lazy">
+        <div class="absolute inset-0 bg-gradient-to-t from-primary/20 to-transparent"></div>
+      </div>
+      
+      <h1 class="text-[clamp(2rem,5vw,3.5rem)] font-bold mb-4 text-shadow bg-clip-text text-transparent bg-gradient-to-r from-primary to-rail">
+        你好你好，这里Clay
+      </h1>
+      <p class="text-[clamp(1rem,2vw,1.25rem)] text-slate-600 mb-8 max-w-2xl mx-auto">
+        ENFP话痨 | 星穹铁道狂热爱好者 | 轻度收集控 | 程序猿
+      </p>
+      
+      <div class="flex flex-col sm:flex-row justify-center gap-4">
+        <a href="#contact" class="px-8 py-3 bg-primary hover:bg-primary/90 text-white rounded-full font-medium shadow-lg shadow-primary/20 transition-all transform hover:-translate-y-1">
+          加个好友
+        </a>
+        <a href="#interests" class="px-8 py-3 bg-white hover:bg-slate-50 text-primary border border-primary/30 rounded-full font-medium shadow-md transition-all transform hover:-translate-y-1">
+          了解我的爱好
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <main class="container mx-auto px-4 pb-20 relative z-10">
+    <!-- 个人资料 -->
+    <section id="profile" class="mb-20 scroll-mt-20">
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-[clamp(1.5rem,3vw,2.5rem)] font-bold mb-8 text-center">
+          个人资料
+        </h2>
+        
+        <div class="bg-white rounded-2xl shadow-xl p-8 md:p-10 card-hover border border-slate-100">
+          <div class="grid md:grid-cols-3 gap-8">
+            <div class="md:col-span-1">
+              <div class="bg-purple-50 rounded-xl p-6 h-full border border-purple-100">
+                <h3 class="text-lg font-semibold mb-4 text-primary">基本信息</h3>
+                <ul class="space-y-4">
+                  <li class="flex items-start">
+                    <span>CN：Clay</span>
+                  </li>
+                  <li class="flex items-start">
+                    <span>坐标：南京</span>
+                  </li>
+                  <li class="flex items-start">
+                    <span>年龄：16岁</span>
+                  </li>
+                  <li class="flex items-start">
+                    <span>性别：男</span>
+                  </li>
+                  <li class="flex items-start">
+                    <span>高中生</span>
+                  </li>
+                  <li class="flex items-start">
+                    <span>常去南京都市圈运转</span>
+                  </li>
+                </ul>
+              </div>
+            </div>
+            
+            <div class="md:col-span-2">
+              <h3 class="text-lg font-semibold mb-4">个人属性</h3>
+              <div class="flex flex-wrap gap-3 mb-6">
+                <span class="px-4 py-2 bg-primary/10 text-primary rounded-full text-sm font-medium tag-hover border border-primary/20">ENFP</span>
+                <span class="px-4 py-2 bg-primary/10 text-primary rounded-full text-sm font-medium tag-hover border border-primary/20">星穹铁道狂热爱好者</span>
+                <span class="px-4 py-2 bg-primary/10 text-primary rounded-full text-sm font-medium tag-hover border border-primary/20">话痨体质</span>
+                <span class="px-4 py-2 bg-primary/10 text-primary rounded-full text-sm font-medium tag-hover border border-primary/20">轻度收集控</span>
+              </div>
+              
+              <h3 class="text-lg font-semibold mb-4">具体爱好</h3>
+              <div class="flex flex-wrap gap-3 mb-6">
+                <span class="px-4 py-2 bg-rail/10 text-rail rounded-full text-sm font-medium tag-hover border border-rail/20">撸代码</span>
+                <span class="px-4 py-2 bg-rail/10 text-rail rounded-full text-sm font-medium tag-hover border border-rail/20">整理银行卡</span>
+                <span class="px-4 py-2 bg-rail/10 text-rail rounded-full text-sm font-medium tag-hover border border-rail/20">研究平面设计</span>
+              </div>
+              
+              <h3 class="text-lg font-semibold mb-4">备注</h3>
+              <div class="bg-purple-50 p-4 rounded-lg border border-purple-100">
+                <p class="text-slate-600 italic">
+                  没开mz，动态没点赞就是没刷到，直接小窗戳我更高效～
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    
+    <!-- 兴趣爱好 -->
+    <section id="interests" class="mb-20 scroll-mt-20">
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-[clamp(1.5rem,3vw,2.5rem)] font-bold mb-8 text-center">
+          兴趣爱好
+        </h2>
+        
+        <!-- 主推角色滚动容器 -->
+        <div class="relative mb-12">
+          <h3 class="text-xl font-semibold mb-6">
+            主推角色
+          </h3>
+          
+          <!-- 滚动轨道 -->
+          <div id="character-scroll" class="flex gap-6 py-4 overflow-x-auto scroll-container scroll-gradient">
+            <div class="flex gap-6">
+              <!-- 1. 流萤资料卡 -->
+              <div class="w-full sm:w-80 flex-shrink-0 bg-white rounded-2xl shadow-md overflow-hidden card-hover">
+                <div class="h-48 overflow-hidden relative">
+                  <img src="https://raw.githubusercontent.com/Claylark/Clay-s-Space/refs/heads/main/119791514_p0.jpg" alt="流萤" 
+                       class="w-full h-full object-cover transition-transform duration-700 hover:scale-110" loading="lazy">
+                  <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+                  <h3 class="absolute bottom-4 right-4 text-white text-xl font-bold">流萤</h3>
+                </div>
+              </div>
+              
+              <!-- 2. 知更鸟资料卡 -->
+              <div class="w-full sm:w-80 flex-shrink-0 bg-white rounded-2xl shadow-md overflow-hidden card-hover">
+                <div class="h-48 overflow-hidden relative">
+                  <img src="https://raw.githubusercontent.com/Claylark/Clay-s-Space/refs/heads/main/115734659_p0.jpg" alt="知更鸟" 
+                       class="w-full h-full object-cover transition-transform duration-700 hover:scale-110" loading="lazy">
+                  <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+                  <h3 class="absolute bottom-4 right-4 text-white text-xl font-bold">知更鸟</h3>
+                </div>
+              </div>
+              
+              <!-- 3. 遐蝶资料卡 -->
+              <div class="w-full sm:w-80 flex-shrink-0 bg-white rounded-2xl shadow-md overflow-hidden card-hover">
+                <div class="h-48 overflow-hidden relative">
+                  <img src="https://raw.githubusercontent.com/Claylark/Clay-s-Space/refs/heads/main/129858072_p0.jpg" alt="遐蝶" 
+                       class="w-full h-full object-cover transition-transform duration-700 hover:scale-110" loading="lazy">
+                  <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+                  <h3 class="absolute bottom-4 right-4 text-white text-xl font-bold">遐蝶</h3>
+                </div>
+              </div>
+              
+              <!-- 4. 阮·梅资料卡 -->
+              <div class="w-full sm:w-80 flex-shrink-0 bg-white rounded-2xl shadow-md overflow-hidden card-hover">
+                <div class="h-48 overflow-hidden relative">
+                  <img src="https://picsum.photos/id/65/600/400" alt="阮·梅" 
+                       class="w-full h-full object-cover transition-transform duration-700 hover:scale-110" loading="lazy">
+                  <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+                  <h3 class="absolute bottom-4 right-4 text-white text-xl font-bold">阮·梅</h3>
+                </div>
+              </div>
+              
+              <!-- 5. 爱莉希雅资料卡 -->
+              <div class="w-full sm:w-80 flex-shrink-0 bg-white rounded-2xl shadow-md overflow-hidden card-hover">
+                <div class="h-48 overflow-hidden relative">
+                  <img src="https://picsum.photos/id/42/600/400" alt="爱莉希雅" 
+                       class="w-full h-full object-cover transition-transform duration-700 hover:scale-110" loading="lazy">
+                  <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+                  <h3 class="absolute bottom-4 right-4 text-white text-xl font-bold">爱莉希雅</h3>
+                </div>
+              </div>
+              
+              <!-- 6. 昔涟资料卡 -->
+              <div class="w-full sm:w-80 flex-shrink-0 bg-white rounded-2xl shadow-md overflow-hidden card-hover">
+                <div class="h-48 overflow-hidden relative">
+                  <img src="https://picsum.photos/id/33/600/400" alt="昔涟" 
+                       class="w-full h-full object-cover transition-transform duration-700 hover:scale-110" loading="lazy">
+                  <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+                  <h3 class="absolute bottom-4 right-4 text-white text-xl font-bold">昔涟</h3>
+                </div>
+              </div>
+              
+              <!-- 7. 大黑塔资料卡 -->
+              <div class="w-full sm:w-80 flex-shrink-0 bg-white rounded-2xl shadow-md overflow-hidden card-hover">
+                <div class="h-48 overflow-hidden relative">
+                  <img src="https://picsum.photos/id/77/600/400" alt="大黑塔" 
+                       class="w-full h-full object-cover transition-transform duration-700 hover:scale-110" loading="lazy">
+                  <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+                  <h3 class="absolute bottom-4 right-4 text-white text-xl font-bold">大黑塔</h3>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- 核心爱好 -->
+        <div class="mb-12">
+          <h3 class="text-xl font-semibold mb-6">
+            核心爱好
+          </h3>
+          <div class="flex flex-wrap gap-3">
+            <span class="px-5 py-3 bg-gradient-to-r from-primary/10 to-rail/10 text-slate-800 rounded-xl text-base font-medium tag-hover border border-primary/20">
+              崩坏·星穹铁道
+            </span>
+            <span class="px-5 py-3 bg-gradient-to-r from-primary/10 to-rail/10 text-slate-800 rounded-xl text-base font-medium tag-hover border border-primary/20">
+              轨道交通
+            </span>
+            <span class="px-5 py-3 bg-gradient-to-r from-primary/10 to-rail/10 text-slate-800 rounded-xl text-base font-medium tag-hover border border-primary/20">
+              银行卡收集
+            </span>
+            <span class="px-5 py-3 bg-gradient-to-r from-primary/10 to-rail/10 text-slate-800 rounded-xl text-base font-medium tag-hover border border-primary/20">
+              写代码
+            </span>
+          </div>
+        </div>
+        
+        <!-- 关注领域 -->
+        <div class="mb-12">
+          <h3 class="text-xl font-semibold mb-6">
+            关注领域
+          </h3>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div class="bg-white p-4 rounded-lg border border-slate-100 shadow-sm flex items-center">
+              <span>角色考据 & 剧情分析</span>
+            </div>
+            <div class="bg-white p-4 rounded-lg border border-slate-100 shadow-sm flex items-center">
+              <span>城市轨道交通规划</span>
+            </div>
+            <div class="bg-white p-4 rounded-lg border border-slate-100 shadow-sm flex items-center">
+              <span>平面设计</span>
+            </div>
+            <div class="bg-white p-4 rounded-lg border border-slate-100 shadow-sm flex items-center">
+              <span>二次元插画</span>
+            </div>
+          </div>
+        </div>
+        
+        <!-- 雷点 -->
+        <div>
+          <h3 class="text-xl font-semibold mb-6">
+            雷点
+          </h3>
+          <div class="bg-red-50 p-6 rounded-xl border border-red-100">
+            <div class="flex flex-wrap gap-4">
+              <div class="flex items-center">
+                <span class="w-2 h-2 bg-red-500 rounded-full mr-2"></span>
+                <span>角色黑</span>
+              </div>
+              <div class="flex items-center">
+                <span class="w-2 h-2 bg-red-500 rounded-full mr-2"></span>
+                <span>人身攻击</span>
+              </div>
+              <div class="flex items-center">
+                <span class="w-2 h-2 bg-red-500 rounded-full mr-2"></span>
+                <span>OOC</span>
+              </div>
+              <div class="flex items-center">
+                <span class="w-2 h-2 bg-red-500 rounded-full mr-2"></span>
+                <span>不尊重小众爱好</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    
+    <!-- 想认识 & 交流话题 -->
+    <section id="looking-for" class="mb-20 scroll-mt-20">
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-[clamp(1.5rem,3vw,2.5rem)] font-bold mb-8 text-center">
+          想认识 & 交流话题
+        </h2>
+        
+        <div class="grid md:grid-cols-2 gap-8">
+          <!-- 想认识 -->
+          <div class="bg-white rounded-2xl shadow-xl p-8 card-hover border border-slate-100">
+            <h3 class="text-xl font-semibold mb-6">
+              想认识的朋友
+            </h3>
+            <ul class="space-y-4">
+              <li class="flex items-start">
+                <i class="fa fa-check-circle text-green-500 mt-1 mr-3"></i>
+                <span>星穹铁道同好（特别是流萤/知更鸟/遐蝶推）</span>
+              </li>
+              <li class="flex items-start">
+                <i class="fa fa-check-circle text-green-500 mt-1 mr-3"></i>
+                <span>轨道交通爱好者</span>
+              </li>
+              <li class="flex items-start">
+                <i class="fa fa-check-circle text-green-500 mt-1 mr-3"></i>
+                <span>银行卡收集交流搭子</span>
+              </li>
+              <li class="flex items-start">
+                <i class="fa fa-check-circle text-green-500 mt-1 mr-3"></i>
+                <span>程序猿<br><span class="text-slate-500 text-sm">(有程序员会玩扩列吗（思考）)</span></span>
+              </li>
+            </ul>
+          </div>
+          
+          <!-- 交流话题 -->
+          <div class="bg-white rounded-2xl shadow-xl p-8 card-hover border border-slate-100">
+            <h3 class="text-xl font-semibold mb-6">
+              交流话题
+            </h3>
+            <ul class="space-y-4">
+              <li class="flex items-start">
+                <i class="fa fa-comment text-primary mt-1 mr-3"></i>
+                <span>星穹铁道剧情&设定&活动</span>
+              </li>
+              <li class="flex items-start">
+                <i class="fa fa-comment text-primary mt-1 mr-3"></i>
+                <span>轨道交通线路规划</span>
+              </li>
+              <li class="flex items-start">
+                <i class="fa fa-comment text-primary mt-1 mr-3"></i>
+                <span>银行卡设计美学</span>
+              </li>
+              <li class="flex items-start">
+                <i class="fa fa-comment text-primary mt-1 mr-3"></i>
+                <span>代码小技巧/项目交流</span>
+              </li>
+              <li class="flex items-start">
+                <i class="fa fa-comment text-primary mt-1 mr-3"></i>
+                <span>二次元插画讨论</span>
+              </li>
+              <li class="flex items-start">
+                <i class="fa fa-comment text-primary mt-1 mr-3"></i>
+                <span>日常唠嗑</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+    
+    <!-- 联系方式 -->
+    <section id="contact" class="mb-10 scroll-mt-20">
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-[clamp(1.5rem,3vw,2.5rem)] font-bold mb-8 text-center">
+          联系方式
+        </h2>
+        
+        <div class="bg-gradient-to-br from-white to-primary/5 rounded-2xl shadow-xl p-8 md:p-10 border border-primary/10">
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div class="space-y-6">
+              <!-- QQ联系方式 -->
+              <div class="flex items-center p-4 bg-white rounded-xl border border-slate-100 hover:border-primary/30 transition-colors shadow-sm">
+                <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center mr-4">
+                  <i class="fa fa-qq text-primary text-xl"></i>
+                </div>
+                <div>
+                  <h4 class="font-medium text-sm text-slate-500">QQ</h4>
+                  <a href="https://qm.qq.com/cgi-bin/qm/qr?k=6TBe5kg-PeyyAHR7FuX8z6K7_aNd5s1L" 
+                     class="text-lg hover:text-primary transition-colors">1273540767</a>
+                </div>
+              </div>
+              
+              <!-- 小红书联系方式 -->
+              <div class="flex items-center p-4 bg-white rounded-xl border border-slate-100 hover:border-primary/30 transition-colors shadow-sm">
+                <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center mr-4">
+                  <i class="fa fa-book text-primary text-xl"></i>
+                </div>
+                <div>
+                  <h4 class="font-medium text-sm text-slate-500">小红书</h4>
+                  <a href="https://www.xiaohongshu.com/user/profile/ClayLiu" target="_blank" rel="noopener noreferrer"
+                     class="text-lg hover:text-primary transition-colors">ClayLiu</a>
+                </div>
+              </div>
+            </div>
+            
+            <div class="space-y-6">
+              <!-- GitHub联系方式 -->
+              <div class="flex items-center p-4 bg-white rounded-xl border border-slate-100 hover:border-primary/30 transition-colors shadow-sm">
+                <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center mr-4">
+                  <i class="fa fa-github text-primary text-xl"></i>
+                </div>
+                <div>
+                  <h4 class="font-medium text-sm text-slate-500">GitHub</h4>
+                  <a href="https://github.com/Claylark" target="_blank" rel="noopener noreferrer"
+                     class="text-lg hover:text-primary transition-colors">@Claylark</a>
+                  <p class="text-xs text-slate-500 mt-1">如果可能烦请follow一下</p>
+                </div>
+              </div>
+              
+              <!-- 邮箱联系方式 -->
+              <div class="flex items-center p-4 bg-white rounded-xl border border-slate-100 hover:border-primary/30 transition-colors shadow-sm">
+                <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center mr-4">
+                  <i class="fa fa-envelope text-primary text-xl"></i>
+                </div>
+                <div>
+                  <h4 class="font-medium text-sm text-slate-500">邮箱</h4>
+                  <a href="mailto:0@elynfc.com" class="block text-sm hover:text-primary transition-colors">0@elynfc.com</a>
+                  <a href="mailto:firefly@fyrefly.cn" class="block text-sm hover:text-primary transition-colors">firefly@fyrefly.cn</a>
+                  <a href="mailto:clay@castorice.co" class="block text-sm hover:text-primary transition-colors">clay@castorice.co</a>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <div class="mt-8 text-center">
+            <p class="text-slate-600">点击可直接跳转对应平台，祝愉扩！</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- 页脚 -->
+  <footer class="bg-white/80 backdrop-blur-md py-6 border-t border-slate-100 relative z-10">
+    <div class="container mx-auto px-4 text-center text-slate-500 text-sm">
+      <p>Clay's Space &copy; 2023</p>
+      <p class="mt-2">愿此行，终抵群星！</p> 
+      <p class="mt-2">ICP备案号 不存在</p>
+    </div>
+  </footer>
+
+  <script>
+    // 导航栏滚动效果
+    const navbar = document.getElementById('navbar');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 50) {
+        navbar.classList.add('py-2', 'shadow');
+        navbar.classList.remove('py-3', 'shadow-sm');
+      } else {
+        navbar.classList.add('py-3', 'shadow-sm');
+        navbar.classList.remove('py-2', 'shadow');
+      }
+    });
+    
+    // 移动端菜单切换
+    const menuBtn = document.getElementById('menuBtn');
+    const mobileMenu = document.getElementById('mobileMenu');
+    menuBtn.addEventListener('click', () => {
+      mobileMenu.classList.toggle('hidden');
+      const icon = menuBtn.querySelector('i');
+      icon.classList.toggle('fa-bars');
+      icon.classList.toggle('fa-times');
+    });
+    
+    // 平滑滚动
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        if (!mobileMenu.classList.contains('hidden')) {
+          mobileMenu.classList.add('hidden');
+          const icon = menuBtn.querySelector('i');
+          icon.classList.add('fa-bars');
+          icon.classList.remove('fa-times');
+        }
+        document.querySelector(this.getAttribute('href')).scrollIntoView({
+          behavior: 'smooth'
+        });
+      });
+    });
+    
+    // 卡片滚动动画
+    const animateOnScroll = () => {
+      const cards = document.querySelectorAll('.card-hover');
+      cards.forEach(card => {
+        const cardTop = card.getBoundingClientRect().top;
+        const triggerBottom = window.innerHeight * 0.8;
+        
+        if (cardTop < triggerBottom) {
+          card.classList.add('opacity-100', 'translate-y-0');
+          card.classList.remove('opacity-0', 'translate-y-10');
+        }
+      });
+    };
+    
+    // 初始化卡片样式
+    document.querySelectorAll('.card-hover').forEach(card => {
+      card.classList.add('transition-all', 'duration-700', 'opacity-0', 'translate-y-10');
+    });
+    
+    // 初始加载和滚动时触发动画
+    window.addEventListener('load', animateOnScroll);
+    window.addEventListener('scroll', animateOnScroll);
+  </script>
+</body>
+</html>
