@@ -184,7 +184,7 @@
                     <span>坐标：南京</span>
                   </li>
                   <li class="flex items-start">
-                    <span>年龄：17岁</span>
+                    <span>年龄：17</span>
                   </li>
                   <li class="flex items-start">
                     <span>性别：M</span>
@@ -465,57 +465,79 @@
         
         <div class="bg-gradient-to-br from-white to-primary/5 rounded-2xl shadow-xl p-8 md:p-10 border border-primary/10">
           <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div class="space-y-6">
-              <!-- QQ联系方式 -->
-              <div class="flex items-center p-4 bg-white rounded-xl border border-slate-100 hover:border-primary/30 transition-colors shadow-sm">
-                <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center mr-4">
-                  <i class="fa fa-qq text-primary text-xl"></i>
-                </div>
-                <div>
-                  <h4 class="font-medium text-sm text-slate-500">QQ</h4>
-                  <a href="https://qm.qq.com/cgi-bin/qm/qr?k=6TBe5kg-PeyyAHR7FuX8z6K7_aNd5s1L" 
-                     class="text-lg hover:text-primary transition-colors">1273540767</a>
-                </div>
+            <!-- 1. QQ -->
+            <div class="flex items-center p-4 bg-white rounded-xl border border-slate-100 hover:border-primary/30 transition-colors shadow-sm">
+              <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center mr-4">
+                <i class="fa fa-qq text-primary text-xl"></i>
               </div>
-              
-              <!-- 小红书联系方式 -->
-              <div class="flex items-center p-4 bg-white rounded-xl border border-slate-100 hover:border-primary/30 transition-colors shadow-sm">
-                <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center mr-4">
-                  <i class="fa fa-book text-primary text-xl"></i>
-                </div>
-                <div>
-                  <h4 class="font-medium text-sm text-slate-500">小红书</h4>
-                  <a href="https://www.xiaohongshu.com/user/profile/661a4b260000000007004838" target="_blank" rel="noopener noreferrer"
-                     class="text-lg hover:text-primary transition-colors">ClayLiu</a>
-                </div>
+              <div>
+                <h4 class="font-medium text-sm text-slate-500">QQ</h4>
+                <a href="https://qm.qq.com/cgi-bin/qm/qr?k=6TBe5kg-PeyyAHR7FuX8z6K7_aNd5s1L" 
+                   class="text-lg hover:text-primary transition-colors">1273540767</a>
               </div>
             </div>
             
-            <div class="space-y-6">
-              <!-- GitHub联系方式 -->
-              <div class="flex items-center p-4 bg-white rounded-xl border border-slate-100 hover:border-primary/30 transition-colors shadow-sm">
-                <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center mr-4">
-                  <i class="fa fa-github text-primary text-xl"></i>
-                </div>
-                <div>
-                  <h4 class="font-medium text-sm text-slate-500">GitHub</h4>
-                  <a href="https://github.com/Claylark" target="_blank" rel="noopener noreferrer"
-                     class="text-lg hover:text-primary transition-colors">@Claylark</a>
-                  <p class="text-xs text-slate-500 mt-1">如果可能烦请follow一下</p>
-                </div>
+            <!-- 2. 小红书 -->
+            <div class="flex items-center p-4 bg-white rounded-xl border border-slate-100 hover:border-primary/30 transition-colors shadow-sm">
+              <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center mr-4">
+                <i class="fa fa-book text-primary text-xl"></i>
               </div>
-              
-              <!-- 邮箱联系方式 -->
-              <div class="flex items-center p-4 bg-white rounded-xl border border-slate-100 hover:border-primary/30 transition-colors shadow-sm">
-                <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center mr-4">
-                  <i class="fa fa-envelope text-primary text-xl"></i>
-                </div>
-                <div>
-                  <h4 class="font-medium text-sm text-slate-500">邮箱</h4>
-                  <a href="mailto:0@elynfc.com" class="block text-sm hover:text-primary transition-colors">0@elynfc.com</a>
-                  <a href="mailto:firefly@fyrefly.cn" class="block text-sm hover:text-primary transition-colors">firefly@fyrefly.cn</a>
-                  <a href="mailto:clay@castorice.co" class="block text-sm hover:text-primary transition-colors">clay@castorice.co</a>
-                </div>
+              <div>
+                <h4 class="font-medium text-sm text-slate-500">小红书</h4>
+                <a href="https://www.xiaohongshu.com/user/profile/661a4b26000000007004838" target="_blank" rel="noopener noreferrer"
+                   class="text-lg hover:text-primary transition-colors">ClayLiu</a>
+              </div>
+            </div>
+            
+            <!-- 3. Bilibili（小电视图标） -->
+            <div class="flex items-center p-4 bg-white rounded-xl border border-slate-100 hover:border-primary/30 transition-colors shadow-sm">
+              <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center mr-4">
+                <i class="fa fa-television text-primary text-xl"></i> <!-- 小电视图标 -->
+              </div>
+              <div>
+                <h4 class="font-medium text-sm text-slate-500">Bilibili</h4>
+                <a href="https://space.bilibili.com/521560305" target="_blank" rel="noopener noreferrer"
+                   class="text-lg hover:text-primary transition-colors">Clay-Liu</a>
+              </div>
+            </div>
+            
+            <!-- 4. LOFTER（暂未开放） -->
+            <div class="flex items-center p-4 bg-white rounded-xl border border-slate-100 hover:border-primary/30 transition-colors shadow-sm">
+              <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center mr-4">
+                <i class="fa fa-picture-o text-primary text-xl"></i>
+              </div>
+              <div>
+                <h4 class="font-medium text-sm text-slate-500">LOFTER</h4>
+                <!-- 原链接已注释 -->
+                <!-- <a href="https://www.lofter.com/你的用户名" target="_blank" rel="noopener noreferrer"
+                   class="text-lg hover:text-primary transition-colors">Clay的铁道日志</a> -->
+                <span class="text-lg text-slate-400">暂未开放</span>
+              </div>
+            </div>
+            
+            <!-- 5. GitHub（下移） -->
+            <div class="flex items-center p-4 bg-white rounded-xl border border-slate-100 hover:border-primary/30 transition-colors shadow-sm">
+              <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center mr-4">
+                <i class="fa fa-github text-primary text-xl"></i>
+              </div>
+              <div>
+                <h4 class="font-medium text-sm text-slate-500">GitHub</h4>
+                <a href="https://github.com/Claylark" target="_blank" rel="noopener noreferrer"
+                   class="text-lg hover:text-primary transition-colors">@Claylark</a>
+                <p class="text-xs text-slate-500 mt-1">如果可能烦请follow一下</p>
+              </div>
+            </div>
+            
+            <!-- 6. 邮箱（下移） -->
+            <div class="flex items-center p-4 bg-white rounded-xl border border-slate-100 hover:border-primary/30 transition-colors shadow-sm">
+              <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center mr-4">
+                <i class="fa fa-envelope text-primary text-xl"></i>
+              </div>
+              <div>
+                <h4 class="font-medium text-sm text-slate-500">邮箱</h4>
+                <a href="mailto:0@elynfc.com" class="block text-sm hover:text-primary transition-colors">0@elynfc.com</a>
+                <a href="mailto:firefly@fyrefly.cn" class="block text-sm hover:text-primary transition-colors">firefly@fyrefly.cn</a>
+                <a href="mailto:clay@castorice.co" class="block text-sm hover:text-primary transition-colors">clay@castorice.co</a>
               </div>
             </div>
           </div>
@@ -531,7 +553,7 @@
   <!-- 页脚 -->
   <footer class="bg-white/80 backdrop-blur-md py-6 border-t border-slate-100 relative z-10">
     <div class="container mx-auto px-4 text-center text-slate-500 text-sm">
-      <p>Clay's Space &copy; 2023</p>
+      <p>Clay's Space &copy; 2025-2026 保留所有权利</p>
       <p class="mt-2">愿此行，终抵群星！</p> 
       <p class="mt-2">ICP备案号 不存在</p>
     </div>
@@ -600,5 +622,4 @@
     window.addEventListener('scroll', animateOnScroll);
   </script>
 </body>
-
 </html>
