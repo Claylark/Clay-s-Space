@@ -66,30 +66,9 @@
         background-color: rgba(124, 58, 237, 0.3);
         border-radius: 3px;
       }
-      .scroll-gradient {
-        position: relative;
-      }
-      .scroll-gradient::after {
-        content: '';
-        position: absolute;
-        top: 0;
-        right: 0;
-        width: 40px;
-        height: 100%;
-        background: linear-gradient(to right, transparent, rgba(248, 250, 252, 0.9));
-        pointer-events: none;
-        z-index: 1;
-      }
-      .scroll-gradient::before {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 40px;
-        height: 100%;
-        background: linear-gradient(to left, transparent, rgba(248, 250, 252, 0.9));
-        pointer-events: none;
-        z-index: 1;
+      /* 导航项高亮样式 */
+      .nav-active {
+        @apply text-primary border-b-2 border-primary pb-1;
       }
     }
   </style>
@@ -112,10 +91,10 @@
       
       <!-- 桌面端导航 -->
       <div class="hidden md:flex items-center space-x-8">
-        <a href="#profile" class="font-medium hover:text-primary transition-colors">个人资料</a>
-        <a href="#interests" class="font-medium text-primary border-b-2 border-primary pb-1">兴趣爱好</a>
-        <a href="#looking-for" class="font-medium hover:text-primary transition-colors">想认识</a>
-        <a href="#contact" class="font-medium hover:text-primary transition-colors">联系方式</a>
+        <a href="#profile" class="font-medium hover:text-primary transition-colors nav-link">个人资料</a>
+        <a href="#interests" class="font-medium hover:text-primary transition-colors nav-link">兴趣爱好</a>
+        <a href="#looking-for" class="font-medium hover:text-primary transition-colors nav-link">想认识</a>
+        <a href="#contact" class="font-medium hover:text-primary transition-colors nav-link">联系方式</a>
       </div>
       
       <!-- 移动端菜单按钮 -->
@@ -127,10 +106,10 @@
     <!-- 移动端导航菜单 -->
     <div class="md:hidden hidden bg-white shadow-md absolute w-full" id="mobileMenu">
       <div class="container mx-auto px-4 py-3 flex flex-col space-y-4">
-        <a href="#profile" class="font-medium py-2 hover:text-primary transition-colors">个人资料</a>
-        <a href="#interests" class="font-medium py-2 text-primary transition-colors">兴趣爱好</a>
-        <a href="#looking-for" class="font-medium py-2 hover:text-primary transition-colors">想认识</a>
-        <a href="#contact" class="font-medium py-2 hover:text-primary transition-colors">联系方式</a>
+        <a href="#profile" class="font-medium py-2 hover:text-primary transition-colors nav-link">个人资料</a>
+        <a href="#interests" class="font-medium py-2 hover:text-primary transition-colors nav-link">兴趣爱好</a>
+        <a href="#looking-for" class="font-medium py-2 hover:text-primary transition-colors nav-link">想认识</a>
+        <a href="#contact" class="font-medium py-2 hover:text-primary transition-colors nav-link">联系方式</a>
       </div>
     </div>
   </nav>
@@ -240,15 +219,13 @@
             主推角色
           </h3>
           
-          <!-- 滚动轨道 -->
-          <div id="character-scroll" class="flex gap-6 py-4 overflow-x-auto scroll-container scroll-gradient">
+          <div id="character-scroll" class="flex gap-6 py-4 overflow-x-auto scroll-container">
             <div class="flex gap-6">
               <!-- 1. 流萤资料卡 -->
               <div class="w-full sm:w-80 flex-shrink-0 bg-white rounded-2xl shadow-md overflow-hidden card-hover">
                 <div class="h-48 overflow-hidden relative">
                   <img src="https://raw.githubusercontent.com/Claylark/Clay-s-Space/refs/heads/main/119791514_p0.jpg" alt="流萤" 
                        class="w-full h-full object-cover transition-transform duration-700 hover:scale-110" loading="lazy">
-                  <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
                   <h3 class="absolute bottom-4 right-4 text-white text-xl font-bold">流萤</h3>
                 </div>
               </div>
@@ -258,7 +235,6 @@
                 <div class="h-48 overflow-hidden relative">
                   <img src="https://raw.githubusercontent.com/Claylark/Clay-s-Space/refs/heads/main/115734659_p0.jpg" alt="知更鸟" 
                        class="w-full h-full object-cover transition-transform duration-700 hover:scale-110" loading="lazy">
-                  <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
                   <h3 class="absolute bottom-4 right-4 text-white text-xl font-bold">知更鸟</h3>
                 </div>
               </div>
@@ -268,7 +244,6 @@
                 <div class="h-48 overflow-hidden relative">
                   <img src="https://raw.githubusercontent.com/Claylark/Clay-s-Space/refs/heads/main/129858072_p0.jpg" alt="遐蝶" 
                        class="w-full h-full object-cover transition-transform duration-700 hover:scale-110" loading="lazy">
-                  <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
                   <h3 class="absolute bottom-4 right-4 text-white text-xl font-bold">遐蝶</h3>
                 </div>
               </div>
@@ -276,9 +251,8 @@
               <!-- 4. 阮·梅资料卡 -->
               <div class="w-full sm:w-80 flex-shrink-0 bg-white rounded-2xl shadow-md overflow-hidden card-hover">
                 <div class="h-48 overflow-hidden relative">
-                  <img src="https://picsum.photos/id/65/600/400" alt="阮·梅" 
+                  <img src="https://raw.githubusercontent.com/Claylark/Clay-s-Space/refs/heads/main/114916660_p0.jpg" alt="阮·梅" 
                        class="w-full h-full object-cover transition-transform duration-700 hover:scale-110" loading="lazy">
-                  <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
                   <h3 class="absolute bottom-4 right-4 text-white text-xl font-bold">阮·梅</h3>
                 </div>
               </div>
@@ -286,9 +260,8 @@
               <!-- 5. 爱莉希雅资料卡 -->
               <div class="w-full sm:w-80 flex-shrink-0 bg-white rounded-2xl shadow-md overflow-hidden card-hover">
                 <div class="h-48 overflow-hidden relative">
-                  <img src="https://picsum.photos/id/42/600/400" alt="爱莉希雅" 
+                  <img src="https://raw.githubusercontent.com/Claylark/Clay-s-Space/refs/heads/main/128395786_p0.png" alt="爱莉希雅" 
                        class="w-full h-full object-cover transition-transform duration-700 hover:scale-110" loading="lazy">
-                  <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
                   <h3 class="absolute bottom-4 right-4 text-white text-xl font-bold">爱莉希雅</h3>
                 </div>
               </div>
@@ -296,9 +269,8 @@
               <!-- 6. 昔涟资料卡 -->
               <div class="w-full sm:w-80 flex-shrink-0 bg-white rounded-2xl shadow-md overflow-hidden card-hover">
                 <div class="h-48 overflow-hidden relative">
-                  <img src="https://picsum.photos/id/33/600/400" alt="昔涟" 
+                  <img src="https://raw.githubusercontent.com/Claylark/Clay-s-Space/refs/heads/main/136033906_p0.jpg" alt="昔涟" 
                        class="w-full h-full object-cover transition-transform duration-700 hover:scale-110" loading="lazy">
-                  <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
                   <h3 class="absolute bottom-4 right-4 text-white text-xl font-bold">昔涟</h3>
                 </div>
               </div>
@@ -306,9 +278,8 @@
               <!-- 7. 大黑塔资料卡 -->
               <div class="w-full sm:w-80 flex-shrink-0 bg-white rounded-2xl shadow-md overflow-hidden card-hover">
                 <div class="h-48 overflow-hidden relative">
-                  <img src="https://picsum.photos/id/77/600/400" alt="大黑塔" 
+                  <img src="https://raw.githubusercontent.com/Claylark/Clay-s-Space/refs/heads/main/133535224_p0.jpg" alt="大黑塔" 
                        class="w-full h-full object-cover transition-transform duration-700 hover:scale-110" loading="lazy">
-                  <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
                   <h3 class="absolute bottom-4 right-4 text-white text-xl font-bold">大黑塔</h3>
                 </div>
               </div>
@@ -403,7 +374,7 @@
             <ul class="space-y-4">
               <li class="flex items-start">
                 <i class="fa fa-check-circle text-green-500 mt-1 mr-3"></i>
-                <span>星穹铁道同好（特别是流萤/知更鸟/遐蝶推）</span>
+                <span>星穹铁道同好（特别是流萤/知更鸟/遐蝶/昔涟推）</span>
               </li>
               <li class="flex items-start">
                 <i class="fa fa-check-circle text-green-500 mt-1 mr-3"></i>
@@ -489,10 +460,10 @@
               </div>
             </div>
             
-            <!-- 3. Bilibili（小电视图标） -->
+            <!-- 3. bilibili -->
             <div class="flex items-center p-4 bg-white rounded-xl border border-slate-100 hover:border-primary/30 transition-colors shadow-sm">
               <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center mr-4">
-                <i class="fa fa-television text-primary text-xl"></i> <!-- 小电视图标 -->
+                <i class="fa fa-television text-primary text-xl"></i>
               </div>
               <div>
                 <h4 class="font-medium text-sm text-slate-500">Bilibili</h4>
@@ -508,14 +479,11 @@
               </div>
               <div>
                 <h4 class="font-medium text-sm text-slate-500">LOFTER</h4>
-                <!-- 原链接已注释 -->
-                <!-- <a href="https://www.lofter.com/" target="_blank" rel="noopener noreferrer"
-                   class="text-lg hover:text-primary transition-colors">Clay的铁道日志</a> -->
                 <span class="text-lg text-slate-400">暂未开放</span>
               </div>
             </div>
             
-            <!-- 5. GitHub（下移） -->
+            <!-- 5. GitHub -->
             <div class="flex items-center p-4 bg-white rounded-xl border border-slate-100 hover:border-primary/30 transition-colors shadow-sm">
               <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center mr-4">
                 <i class="fa fa-github text-primary text-xl"></i>
@@ -528,7 +496,7 @@
               </div>
             </div>
             
-            <!-- 6. 邮箱（下移） -->
+            <!-- 6. 邮箱 -->
             <div class="flex items-center p-4 bg-white rounded-xl border border-slate-100 hover:border-primary/30 transition-colors shadow-sm">
               <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center mr-4">
                 <i class="fa fa-envelope text-primary text-xl"></i>
@@ -598,6 +566,32 @@
       });
     });
     
+    // 导航高亮逻辑：取消提前高亮，仅在区块范围内高亮
+    const highlightNavOnScroll = () => {
+      const navLinks = document.querySelectorAll('.nav-link');
+      const sections = document.querySelectorAll('section[id]');
+      
+      let currentSection = '';
+      
+      // 仅当滚动位置在区块顶部和底部之间时，视为当前区块
+      sections.forEach(section => {
+        const sectionTop = section.offsetTop;
+        const sectionHeight = section.clientHeight;
+        // 滚动位置 >= 区块顶部 且 滚动位置 < 区块顶部+区块高度
+        if (window.scrollY >= sectionTop && window.scrollY < sectionTop + sectionHeight) {
+          currentSection = section.getAttribute('id');
+        }
+      });
+      
+      // 更新导航高亮
+      navLinks.forEach(link => {
+        link.classList.remove('nav-active');
+        if (link.getAttribute('href') === `#${currentSection}`) {
+          link.classList.add('nav-active');
+        }
+      });
+    };
+    
     // 卡片滚动动画
     const animateOnScroll = () => {
       const cards = document.querySelectorAll('.card-hover');
@@ -617,9 +611,15 @@
       card.classList.add('transition-all', 'duration-700', 'opacity-0', 'translate-y-10');
     });
     
-    // 初始加载和滚动时触发动画
-    window.addEventListener('load', animateOnScroll);
-    window.addEventListener('scroll', animateOnScroll);
+    // 初始加载和滚动时触发
+    window.addEventListener('load', () => {
+      highlightNavOnScroll();
+      animateOnScroll();
+    });
+    window.addEventListener('scroll', () => {
+      highlightNavOnScroll();
+      animateOnScroll();
+    });
   </script>
 </body>
 </html>
